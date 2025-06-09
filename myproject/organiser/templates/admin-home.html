@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard - Virtual Event Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    {% csrf_token %}
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="#" class="logo">VirtualEvent</a>
+            <div class="nav-profile">
+                <div class="profile-img">A A</div>
+                <span class="profile-name">Ayushi Anand</span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">Organizer Dashboard</h1>
+            
+            <div class="dashboard-grid">
+                <!-- Live Streaming Section -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Start Live Streaming</h2>
+                        <p class="card-description">Begin a live session immediately to connect with your audience in real-time.</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="stream-title">Stream Title</label>
+                            <input type="text" id="stream-title" class="form-control" placeholder="Enter your stream title">
+                        </div>
+                        <div class="form-group">
+                            <label for="stream-description">Description (Optional)</label>
+                            <textarea id="stream-description" class="form-control" rows="3" placeholder="Briefly describe what this stream is about"></textarea>
+                        </div>
+                    </div>
+                    <a href="/organiser/live-stream" class="btn btn-success">Go Live Now</a>
+                </div>
+                
+                <!-- Scheduled Events Section -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Scheduled Events</h2>
+                        <p class="card-description">Plan and manage your upcoming events to better organize your calendar.</p>
+                    </div>
+                    
+                    <div class="card-content">
+                        <a href="#" class="btn" id="add-event-btn">+ Add New Event</a>
+                        
+                        <!-- Event List -->
+                        <div class="events-list" id="events-list">
+                            <!-- Events will be added here via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Event Modal -->
+    <div class="modal-overlay" id="add-event-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Event</h3>
+                <button class="modal-close" id="add-modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="event-title">Event Title</label>
+                    <input type="text" id="event-title" class="form-control" placeholder="Enter event title">
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Date</label>
+                    <input type="date" id="event-date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="event-time">Time</label>
+                    <input type="time" id="event-time" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Description (Optional)</label>
+                    <textarea id="event-description" class="form-control" rows="3" placeholder="Briefly describe your event"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="cancel-add-event">Cancel</button>
+                <button class="btn btn-success" id="save-event">Save Event</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Event Modal -->
+    <div class="modal-overlay" id="edit-event-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Event</h3>
+                <button class="modal-close" id="edit-modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-event-id">
+                <div class="form-group">
+                    <label for="edit-event-title">Event Title</label>
+                    <input type="text" id="edit-event-title" class="form-control" placeholder="Enter event title">
+                </div>
+                <div class="form-group">
+                    <label for="edit-event-date">Date</label>
+                    <input type="date" id="edit-event-date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit-event-time">Time</label>
+                    <input type="time" id="edit-event-time" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit-event-description">Description (Optional)</label>
+                    <textarea id="edit-event-description" class="form-control" rows="3" placeholder="Briefly describe your event"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="cancel-edit-event">Cancel</button>
+                <button class="btn btn-success" id="update-event">Update Event</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Event added successfully!</span>
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>
